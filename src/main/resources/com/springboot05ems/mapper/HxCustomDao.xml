@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot05ems.mapper.HxCustomDao">
+
+    <resultMap id="BaseResultMap" type="com.springboot05ems.entity.HxCustom">
+        <!--@Table hx_custom-->
+        <result property="hxBook" column="HX_BOOK" jdbcType="VARCHAR"/>
+        <result property="hxGonghzuodi" column="HX_GONGHZUODI" jdbcType="VARCHAR"/>
+        <result property="hxZhiyeName" column="HX_ZHIYE_NAME" jdbcType="VARCHAR"/>
+        <result property="hxZhiyeId" column="HX_ZHIYE_ID" jdbcType="VARCHAR"/>
+        <result property="hxPhone" column="HX_PHONE" jdbcType="VARCHAR"/>
+        <result property="hxAge" column="HX_AGE" jdbcType="VARCHAR"/>
+        <result property="hxGender" column="HX_GENDER" jdbcType="VARCHAR"/>
+        <result property="hxCustomName" column="HX_CUSTOM_NAME" jdbcType="VARCHAR"/>
+        <result property="hxJlzt" column="HX_JLZT" jdbcType="VARCHAR"/>
+        <result property="hxRzsg" column="HX_RZSG" jdbcType="TIMESTAMP"/>
+        <result property="hxLaiyuan" column="HX_LAIYUAN" jdbcType="VARCHAR"/>
+        <result property="hxBirth" column="HX_BIRTH" jdbcType="TIMESTAMP"/>
+        <result property="hxBooktype" column="HX_BOOKTYPE" jdbcType="VARCHAR"/>
+        <result property="hxKehsi" column="HX_KEHSI" jdbcType="VARCHAR"/>
+        <result property="hx_hxCustomId" column="HX_CUSTOM_ID" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          *
+        from hx_custom
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          HX_BOOK, HX_GONGHZUODI, HX_ZHIYE_NAME, HX_ZHIYE_ID,
+          HX_PHONE, HX_AGE, HX_GENDER, HX_CUSTOM_NAME,
+          HX_JLZT, HX_RZSG, HX_LAIYUAN, HX_BIRTH, HX_BOOKTYPE, HX_KEHSI, HX_HX_CUSTOM_ID
+        from hx_custom
+        <where>
+            <if test="hxBook != null and hxBook != ''">
+                and HX_BOOK = #{hxBook}
+            </if>
+            <if test="hxGonghzuodi != null and hxGonghzuodi != ''">
+                and HX_GONGHZUODI = #{hxGonghzuodi}
+            </if>
+            <if test="hxZhiyeName != null and hxZhiyeName != ''">
+                and HX_ZHIYE_NAME = #{hxZhiyeName}
+            </if>
+            <if test="hxZhiyeId != null and hxZhiyeId != ''">
+                and HX_ZHIYE_ID = #{hxZhiyeId}
+            </if>
+            <if test="hxPhone != null and hxPhone != ''">
+                and HX_PHONE = #{hxPhone}
+            </if>
+            <if test="hxAge != null and hxAge != ''">
+                and HX_AGE = #{hxAge}
+            </if>
+            <if test="hxGender != null and hxGender != ''">
+                and HX_GENDER = #{hxGender}
+            </if>
+            <if test="hxCustomName != null and hxCustomName != ''">
+                and HX_CUSTOM_NAME = #{hxCustomName}
+            </if>
+            <if test="hxJlzt != null and hxJlzt != ''">
+                and HX_JLZT = #{hxJlzt}
+            </if>
+            <if test="hxRzsg != null">
+                and HX_RZSG = #{hxRzsg}
+            </if>
+            <if test="hxLaiyuan != null and hxLaiyuan != ''">
+                and HX_LAIYUAN = #{hxLaiyuan}
+            </if>
+            <if test="hxBirth != null">
+                and HX_BIRTH = #{hxBirth}
+            </if>
+            <if test="hxBooktype != null and hxBooktype != ''">
+                and HX_BOOKTYPE = #{hxBooktype}
+            </if>
+            <if test="hxKehsi != null and hxKehsi != ''">
+                and HX_KEHSI = #{hxKehsi}
+            </if>
+            <if test="hx_hxCustomId != null and hx_hxCustomId != ''">
+                and HX_HX_CUSTOM_ID = #{hx_hxCustomId}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          HX_BOOK, HX_GONGHZUODI,
+          HX_ZHIYE_NAME, HX_ZHIYE_ID, HX_PHONE,
+           HX_AGE, HX_GENDER, HX_CUSTOM_NAME, HX_JLZT, HX_RZSG, HX_LAIYUAN, HX_BIRTH, HX_BOOKTYPE, HX_KEHSI,
+           HX_HX_CUSTOM_ID
+        from huaxixueyuan.hx_custom
+    </select>
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from hx_custom
+        <where>
+            <if test="hxBook != null and hxBook != ''">
+                and HX_BOOK = #{hxBook}
+            </if>
+            <if test="hxGonghzuodi != null and hxGonghzuodi != ''">
+                and HX_GONGHZUODI = #{hxGonghzuodi}
+            </if>
+            <if test="hxZhiyeName != null and hxZhiyeName != ''">
+                and HX_ZHIYE_NAME = #{hxZhiyeName}
+            </if>
+            <if test="hxZhiyeId != null and hxZhiyeId != ''">
+                and HX_ZHIYE_ID = #{hxZhiyeId}
+            </if>
+            <if test="hxPhone != null and hxPhone != ''">
+                and HX_PHONE = #{hxPhone}
+            </if>
+            <if test="hxAge != null and hxAge != ''">
+                and HX_AGE = #{hxAge}
+            </if>
+            <if test="hxGender != null and hxGender != ''">
+                and HX_GENDER = #{hxGender}
+            </if>
+            <if test="hxCustomName != null and hxCustomName != ''">
+                and HX_CUSTOM_NAME = #{hxCustomName}
+            </if>
+            <if test="hxJlzt != null and hxJlzt != ''">
+                and HX_JLZT = #{hxJlzt}
+            </if>
+            <if test="hxRzsg != null">
+                and HX_RZSG = #{hxRzsg}
+            </if>
+            <if test="hxLaiyuan != null and hxLaiyuan != ''">
+                and HX_LAIYUAN = #{hxLaiyuan}
+            </if>
+            <if test="hxBirth != null">
+                and HX_BIRTH = #{hxBirth}
+            </if>
+            <if test="hxBooktype != null and hxBooktype != ''">
+                and HX_BOOKTYPE = #{hxBooktype}
+            </if>
+            <if test="hxKehsi != null and hxKehsi != ''">
+                and HX_KEHSI = #{hxKehsi}
+            </if>
+            <if test="hx_hxCustomId != null and hx_hxCustomId != ''">
+                and HX_HX_CUSTOM_ID = #{hx_hxCustomId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="hx_hxCustomId" useGeneratedKeys="true">
+        insert into hx_custom(HX_BOOK, HX_GONGHZUODI, HX_ZHIYE_NAME, HX_ZHIYE_ID,
+         HX_PHONE, HX_AGE, HX_GENDER, HX_CUSTOM_NAME, HX_JLZT,
+          HX_RZSG, HX_LAIYUAN, HX_BIRTH, HX_BOOKTYPE, HX_KEHSI)
+        values (#{hxBook}, #{hxGonghzuodi}, #{hxZhiyeName},
+         #{hxZhiyeId}, #{hxPhone}, #{hxAge}, #{hxGender}, #{hxCustomName},
+          #{hxJlzt}, #{hxRzsg}, #{hxLaiyuan}, #{hxBirth}, #{hxBooktype}, #{hxKehsi})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="hx_hxCustomId" useGeneratedKeys="true">
+        insert into hx_custom(HX_BOOK, HX_GONGHZUODI, HX_ZHIYE_NAME, HX_ZHIYE_ID, HX_PHONE, HX_AGE, HX_GENDER, HX_CUSTOM_NAME, HX_JLZT, HX_RZSG, HX_LAIYUAN, HX_BIRTH, HX_BOOKTYPE, HX_KEHSI)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.hxBook}, #{entity.hxGonghzuodi}, #{entity.hxZhiyeName}, #{entity.hxZhiyeId}, #{entity.hxPhone}, #{entity.hxAge}, #{entity.hxGender}, #{entity.hxCustomName}, #{entity.hxJlzt}, #{entity.hxRzsg}, #{entity.hxLaiyuan}, #{entity.hxBirth}, #{entity.hxBooktype}, #{entity.hxKehsi})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="hx_hxCustomId" useGeneratedKeys="true">
+        insert into hx_custom(HX_BOOK, HX_GONGHZUODI, HX_ZHIYE_NAME, HX_ZHIYE_ID, HX_PHONE, HX_AGE, HX_GENDER, HX_CUSTOM_NAME, HX_JLZT, HX_RZSG, HX_LAIYUAN, HX_BIRTH, HX_BOOKTYPE, HX_KEHSI)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.hxBook}, #{entity.hxGonghzuodi}, #{entity.hxZhiyeName}, #{entity.hxZhiyeId}, #{entity.hxPhone}, #{entity.hxAge}, #{entity.hxGender}, #{entity.hxCustomName}, #{entity.hxJlzt}, #{entity.hxRzsg}, #{entity.hxLaiyuan}, #{entity.hxBirth}, #{entity.hxBooktype}, #{entity.hxKehsi})
+        </foreach>
+        on duplicate key update
+        HX_BOOK = values(HX_BOOK),
+        HX_GONGHZUODI = values(HX_GONGHZUODI),
+        HX_ZHIYE_NAME = values(HX_ZHIYE_NAME),
+        HX_ZHIYE_ID = values(HX_ZHIYE_ID),
+        HX_PHONE = values(HX_PHONE),
+        HX_AGE = values(HX_AGE),
+        HX_GENDER = values(HX_GENDER),
+        HX_CUSTOM_NAME = values(HX_CUSTOM_NAME),
+        HX_JLZT = values(HX_JLZT),
+        HX_RZSG = values(HX_RZSG),
+        HX_LAIYUAN = values(HX_LAIYUAN),
+        HX_BIRTH = values(HX_BIRTH),
+        HX_BOOKTYPE = values(HX_BOOKTYPE),
+        HX_KEHSI = values(HX_KEHSI)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update hx_custom
+        <set>
+            <if test="hxBook != null and hxBook != ''">
+                HX_BOOK = #{hxBook},
+            </if>
+            <if test="hxGonghzuodi != null and hxGonghzuodi != ''">
+                HX_GONGHZUODI = #{hxGonghzuodi},
+            </if>
+            <if test="hxZhiyeName != null and hxZhiyeName != ''">
+                HX_ZHIYE_NAME = #{hxZhiyeName},
+            </if>
+            <if test="hxZhiyeId != null and hxZhiyeId != ''">
+                HX_ZHIYE_ID = #{hxZhiyeId},
+            </if>
+            <if test="hxPhone != null and hxPhone != ''">
+                HX_PHONE = #{hxPhone},
+            </if>
+            <if test="hxAge != null and hxAge != ''">
+                HX_AGE = #{hxAge},
+            </if>
+            <if test="hxGender != null and hxGender != ''">
+                HX_GENDER = #{hxGender},
+            </if>
+            <if test="hxCustomName != null and hxCustomName != ''">
+                HX_CUSTOM_NAME = #{hxCustomName},
+            </if>
+            <if test="hxJlzt != null and hxJlzt != ''">
+                HX_JLZT = #{hxJlzt},
+            </if>
+            <if test="hxRzsg != null">
+                HX_RZSG = #{hxRzsg},
+            </if>
+            <if test="hxLaiyuan != null and hxLaiyuan != ''">
+                HX_LAIYUAN = #{hxLaiyuan},
+            </if>
+            <if test="hxBirth != null">
+                HX_BIRTH = #{hxBirth},
+            </if>
+            <if test="hxBooktype != null and hxBooktype != ''">
+                HX_BOOKTYPE = #{hxBooktype},
+            </if>
+            <if test="hxKehsi != null and hxKehsi != ''">
+                HX_KEHSI = #{hxKehsi},
+            </if>
+        </set>
+        where HX_HX_CUSTOM_ID = #{hx_hxCustomId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from hx_custom where HX_HX_CUSTOM_ID = #{hx_hxCustomId}
+    </delete>
+
+</mapper>
+
